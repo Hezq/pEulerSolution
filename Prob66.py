@@ -23,28 +23,36 @@ def isSquare(num):
         return True
     return False
 
+def yExistsForQd(x, D, y):
+    ySqua = y * y
+    quad = ySqua * D + 1
+    if isSquare(quad):
+        x[0] = int(math.sqrt(quad))
+        return True
+    return False
+
 def solveQuadDioph(D):
     if isSquare(D):
         return (0, 0)
-    xCand = 2
+##    xCand = 2
+    yCand = 1
     while True:
-        for yCand in [xCand-i for i in range(1, xCand)]:
-            qDiophValue = quadDiophValue(xCand, yCand, D)
-            if qDiophValue == 0:
-                return (xCand, yCand)
-            elif qDiophValue > 0:
-                break
-        xCand += 1
+        xCand = [0]
+        if yExistsForQd(xCand, D, yCand) == True:
+            return (xCand[0], yCand)
+        yCand += 1
     return (0, 0)
 
 if __name__ == '__main__':
 ##    for i in range(2, 14):
 ##        print solveQuadDioph(i)
-    print solveQuadDioph(46)
-    exit(0)
-    minimalX = 0
+##    print solveQuadDioph(61)
+##    exit(0)
+    maximumX = 0
     for i in range(2, 1001):
         result = solveQuadDioph(i)
-        if 0 != result[0] and minimalX < result[0]:
+        print i, result
+        if 0 != result[0] and maximumX < result[0]:
+            maximumX = result[0]
             result = (result[0], result[1], i)
     print result
