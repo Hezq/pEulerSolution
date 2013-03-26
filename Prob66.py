@@ -48,11 +48,37 @@ if __name__ == '__main__':
 ##        print solveQuadDioph(i)
 ##    print solveQuadDioph(61)
 ##    exit(0)
-    maximumX = 0
+    
+##    maximumX = 0
+##    for i in range(2, 1001):
+##        result = solveQuadDioph(i)
+##        print i, result
+##        if 0 != result[0] and maximumX < result[0]:
+##            maximumX = result[0]
+##            result = (result[0], result[1], i)
+##    print result
+
+    dList = []
     for i in range(2, 1001):
-        result = solveQuadDioph(i)
-        print i, result
-        if 0 != result[0] and maximumX < result[0]:
-            maximumX = result[0]
-            result = (result[0], result[1], i)
-    print result
+        if isSquare(i) == False:
+            dList.append(i)
+    maxX = 0
+    x = 2
+    while len(dList) != 0:
+        for D in dList:
+            value = x * x -1
+            if value % D == 0:
+                if isSquare(value/D):
+                    print D, x, len(dList)
+                    if maxX < x:
+                        maxX = x
+                    dList.remove(D)
+##            value = D * x * x + 1
+##            if isSquare(value):
+##                print D, x
+##                if maxX < x:
+##                    maxX = x
+##                dList.remove(D)
+        x += 1
+    print maxX
+        
